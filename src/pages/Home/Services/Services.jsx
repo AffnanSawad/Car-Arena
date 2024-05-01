@@ -10,7 +10,7 @@ const Services = () => {
         
         ()=> {
 
-    fetch('services.json')
+    fetch('http://localhost:5000/services')
     .then(res => res.json())
     .then(data => setservices(data))
 
