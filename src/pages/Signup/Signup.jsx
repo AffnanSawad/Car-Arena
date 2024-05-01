@@ -29,6 +29,8 @@ const Signup = () => {
 
         console.log(user)
 
+       
+
     }  )
 
     .then(error => console.log(error))
