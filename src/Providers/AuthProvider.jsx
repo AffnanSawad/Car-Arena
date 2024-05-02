@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
 import { onAuthStateChanged } from "firebase/auth/cordova";
@@ -31,6 +31,13 @@ const AuthProvider = ({children}) => {
    }
 
 
+   const logout = () => {
+    
+    setloading(true)
+    return signOut(auth);
+   }
+
+
 
 
     //ONAUTH STATE CHANGED
@@ -60,6 +67,7 @@ const AuthProvider = ({children}) => {
         user,
         createUser,
         signin,
+        logout,
     }
 
 
