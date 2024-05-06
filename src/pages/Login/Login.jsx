@@ -1,10 +1,17 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProvider";
+import axios from "axios";
 
 const Login = () => {
 
-    const {signin} = useContext(AuthContext)
+    const {signin} = useContext(AuthContext);
+
+    //redirect
+
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location);
 
 
    const handleLogin = event => {
@@ -25,9 +32,31 @@ const Login = () => {
 
     .then( result => {
      
-        const user = result.user
+        const loggedInUser = result.user
 
-        console.log(user)
+        console.log(loggedInUser)
+
+
+        const user = {email};
+
+        //redirect
+
+        //navigate(location?.state ? location?.state : '/');
+    
+        //access toket of JWT
+
+        axios.post('http://localhost:5000/jwt',user ,
+        {withCredentials:true}
+      )
+
+        .then(res => {
+          console.log(res.data)
+          if(res.data.success){
+            navigate(location?.state ? location?.state : '/');
+          }
+        }  )
+
+
 
     }  )
 

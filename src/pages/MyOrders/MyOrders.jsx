@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import MyOrdersRow from "./MyOrdersRow";
 import Swal from 'sweetalert2'
+import axios from "axios";
 
 const MyOrders = () => {
 
@@ -18,10 +19,10 @@ const MyOrders = () => {
     
         ()=>{
 
-            fetch(url)
-            .then(res=>res.json())
-
-            .then(data=>setorders(data))
+           axios.get(url  , {withCredentials:true} )
+           .then(res=> {
+            setorders(res.data)
+           })
         }
 
     
